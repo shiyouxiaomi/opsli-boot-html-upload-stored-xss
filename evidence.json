@@ -1,0 +1,16 @@
+{
+  "product": "hiparker/opsli-boot",
+  "version": "2.2",
+  "username": "songyi",
+  "super_admin": false,
+  "upload_endpoint": "http://127.0.0.1:7001/opsli-boot/api/v1/tools/oss/upload",
+  "uploaded_url": "http://127.0.0.1:7001/opsli-boot/static/files/20261106/179569319306114991XYSWY.html",
+  "anonymous_retrieval": {
+    "status": 200,
+    "content_type": "text/html",
+    "marker_present": true,
+    "content_disposition": null
+  },
+  "proof_file": "proof.html",
+  "safe": true
+}

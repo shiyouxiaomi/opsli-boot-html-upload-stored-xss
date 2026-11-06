@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="xss-proof-marker" content="OPSLI_UPLOAD_HTML_EXECUTED">
+  <title>OPSLI Stored XSS Proof</title>
+  <style>
+    :root { color-scheme: dark; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0b1020; color: #e8eefc; }
+    main { width: min(760px, calc(100% - 48px)); padding: 36px; border: 1px solid #2c3b63; border-radius: 16px; background: #111a33; box-shadow: 0 24px 80px #0008; }
+    h1 { margin: 0 0 24px; color: #73f7b1; font-size: 28px; }
+    dl { display: grid; grid-template-columns: 240px 1fr; gap: 14px 20px; margin: 0; }
+    dt { color: #8ea3cc; }
+    dd { margin: 0; color: #fff; overflow-wrap: anywhere; }
+    .yes { color: #73f7b1; font-weight: 700; }
+    .no { color: #ff8f8f; font-weight: 700; }
+    footer { margin-top: 28px; color: #8ea3cc; line-height: 1.55; }
+  </style>
+</head>
+<body>
+<main>
+  <h1 id="status">Stored XSS executed</h1>
+  <dl>
+    <dt>Origin</dt>
+    <dd id="origin"></dd>
+    <dt>Document URL</dt>
+    <dd id="document-url"></dd>
+    <dt>Page supplied by</dt>
+    <dd>Unauthenticated static upload path</dd>
+    <dt>localStorage token readable</dt>
+    <dd id="token-readable" class="no">NO</dd>
+    <dt>Test token preview</dt>
+    <dd id="token-preview">not present</dd>
+  </dl>
+  <footer>
+    This page is a non-destructive security proof. It does not transmit,
+    print, or retain a real access token and performs no authenticated write.
+  </footer>
+</main>
+<script>
+(() => {
+  "use strict";
+  const token = localStorage.getItem("opsli-token");
+  const readable = Boolean(token);
+  const preview = readable
+    ? `${token.slice(0, 18)}${token.length > 18 ? "..." : ""}`
+    : "not present";
+
+  document.querySelector("#origin").textContent = location.origin;
+  document.querySelector("#document-url").textContent = location.href;
+  document.querySelector("#token-preview").textContent = preview;
+
+  const readableNode = document.querySelector("#token-readable");
+  readableNode.textContent = readable ? "YES" : "NO";
+  readableNode.className = readable ? "yes" : "no";
+
+  window.__OPSLI_STORED_XSS_PROOF__ = Object.freeze({
+    executed: true,
+    origin: location.origin,
+    tokenReadable: readable,
+    tokenLength: readable ? token.length : 0
+  });
+})();
+</script>
+</body>
+</html>
